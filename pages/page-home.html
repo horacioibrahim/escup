@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/shared-icons.html">
+
+<dom-module id="page-home">
+<template>
+<style include="shared-icons"></style>
+<style include="shared-styles"></style>
+<style include="app-grid-style">
+    :host {
+      --app-grid-columns: 3;
+      --app-grid-item-height: 50%;
+      --app-grid-expandible-item-columns: 3;
+    }    
+    .item {
+      
+    }   
+    .item:nth-child(2) {
+        text-align: center;
+    }
+    /* Only the first item should expand */
+    .item:first-child {
+      /* @apply --app-grid-expandible-item; */
+    }    
+    
+    /* based on http://stackoverflow.com/questions/12469875/how-to-code-css-media-queries-targeting-all-mobile-devices-and-tablets */
+    @media only screen and (min-resolution: 117dpi) and (max-resolution: 119dpi), only screen and (min-resolution: 131dpi) and (max-resolution: 133dpi), only screen and (min-resolution: 145dpi) and (max-resolution: 154dpi), only screen and (min-resolution: 162dpi) and (max-resolution: 164dpi), only screen and (min-resolution: 169dpi) {
+        /* touch devices */
+
+    }  
+    @media (min-width: 541px) and (max-width: 1280px) {
+      /* Faz cascata com o querie anterior.  */
+    }        
+    @media (min-width: 960px) {
+      /* screen */
+    }
+    @media screen and (max-width: 1440px) {
+      /* Big screen with limit of 1440 */
+    }
+    @media screen and (max-height: 500px) {
+      /* Devices mobile breakpoint */
+    }
+    @media screen and (max-width: 648px) { 
+      /* Devices mobile breakpoint */
+    } 
+    @media screen and (max-width: 360px) { 
+      /* Devices mobile small breakpoint */
+    }    
+</style>
+  <!-- has-aspect-ratio -->
+  <div class="app-grid"> 
+    <div class="item"></div>
+    <div class="item">
+        <div class="hero">
+            <img src="../assets/img/escup_banner.png">
+        </div>  
+        <div class="description">
+            <h3>Preencha e concorra!</h3>
+            <p>Deixe seu e-mail e participe do sorteio de uma caneca #Estaleiro no final desta apresentação.</p>
+        </div>
+        <div class="data">
+            <div class="input-group">
+              <span class="input-group-label">
+                  <i class="fa fa-envelope-o" aria-hidden="true"></i>
+              </span>
+              <input class="input-group-field" type="email">
+              <div class="input-group-button">
+                <input type="submit" class="button" value="Enviar" placeholder="email">
+              </div>
+            </div>            
+        </div>
+    </div>
+    <div class="item"></div>
+  </div>
+</template>
+<script>
+Polymer({
+    is: "page-home"
+});
+</script>
+</dom-module>

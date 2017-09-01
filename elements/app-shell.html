@@ -1,0 +1,68 @@
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="app-shell">
+<template>
+<style>
+</style> 
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}">
+    </app-route> 
+    <app-route
+        route="{{subroute}}"
+        pattern="/:relpath"
+        data="{{subRouteData}}">
+    </app-route> 
+    
+    <iron-pages selected="[[routeData.page]]" attr-for-selected="name"  fallback-selection="404">
+        <page-home name="home"></page-home>
+        <page-congratulations name="congratulations"></page-congratulations>
+        <page-post name="post" whatis="[[subRouteData.relpath]]"></page-post>
+        <page-urc name="urc"></page-urc>
+        <page-404 name="404"></page-404>
+    </iron-pages>
+    
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/congratulations">Congratulations</a></li>
+        <li><a href="/post/">Post tem subroute</a></li>
+        <li><a href="/urc">urc</a></li>
+    </ul>
+    
+</template>
+    
+<script>
+    Polymer({
+       is: "app-shell",
+       properties: {
+           
+       },
+       observers: [
+          '_routeChanged(route.*)',
+          '_pageChanged(routeData.page)'
+       ],
+       _routeChanged: function(changeRecord){
+              if (changeRecord.path === 'path') {
+                console.log('Path changed!');
+              }           
+       },
+       _pageChanged: function(page){
+            console.log(page);
+            // See: https://www.polymer-project.org/1.0/docs/api/Polymer.Base#method-importHref
+            this.importHref("/pages/page-" + page + ".html",
+              function(sucess){
+                  // .. success
+              }, function(err){
+                  // .. error
+              }, true);           
+       }        
+    });
+</script>    
+</dom-module>
+
+
